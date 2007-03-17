@@ -1,3 +1,0 @@
-#!/bin/bash
-chmod a+x ./pr0nbot.py
-sudo cp ./pr0nbot.py /usr/local/bin/pr0nbot
