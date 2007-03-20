@@ -21,6 +21,9 @@ __date__    = "Mar 20, 2007"
 # massive amounts of data anyway, so we can stick with the
 # Python version. Maybe this will make it work on Mac (or
 # even Jython, who knows).
+#
+# - getpr0n() is now ALWAYS called with aggro=True for image downloads, 
+# even with regular spidering. 
 #===============================================================================
 
 import urllib2
@@ -761,7 +764,7 @@ if __name__ == "__main__":
                 print "Pics:\n"
                 for pic in result['pics']: 
                     print pic
-                    getpr0n(pic, minsize, aggro)
+                    getpr0n(pic, minsize, True)
                 print "\n"
     
             if result['movies'] and not nomovies:
