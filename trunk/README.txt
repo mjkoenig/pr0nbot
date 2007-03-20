@@ -103,6 +103,9 @@ Version 1.0.1:
   * Replaced cPickle with pickle. We are not working with massive amounts of 
   data anyway, so we can stick with the Python version. Maybe this will make
   it work on Mac (or even Jython, who knows).
+  
+  * getpr0n() is now ALWAYS called with aggro=True for image downloads, 
+  even with regular spidering. 
 
 
 (c) 2007 by Fabio FZero
