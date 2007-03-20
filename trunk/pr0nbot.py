@@ -214,7 +214,7 @@ def getconfig(filename):
     Returns False in case of errors.
     """
     
-    global default_ignore
+    global default_config
 
     if os.path.exists(filename):
         configfile = open(filename, "r")
