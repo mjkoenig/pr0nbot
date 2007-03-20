@@ -4,8 +4,20 @@
 Spidering robot for pr0n."""
 
 __author__  = "Fabio FZero"
-__version__ = "1.0"
-__date__    = "Mar 14, 2007"
+__version__ = "1.0.1 SVN"
+__date__    = "Mar 20, 2007"
+
+#===============================================================================
+# Changes from 1.0:
+# 
+# - Merged checkconfig() and getconfig() - 
+# Now getconfig does everything (much nicer).
+# 
+# - Replaced cPickle with pickle. We are not working with
+# massive amounts of data anyway, so we can stick with the
+# Python version. Maybe this will make it work on Mac (or
+# even Jython, who knows).
+#===============================================================================
 
 import urllib2
 import socket
@@ -14,7 +26,7 @@ import time
 import os
 import sys
 import getopt
-import cPickle as pickle
+import pickle
 from urlparse import *
 
 
@@ -31,7 +43,7 @@ defaultdir = "pr0n"
 defaultminsize = 25
 
 # Default ignore file contents
-default_ignore = \
+default_config = \
 """# This is the pr0nbot ignore list.
 # 
 # Write here any strings that should make pr0nbot ignore an URL.
@@ -186,37 +198,27 @@ class NullWrite:
     def write(self, *s): pass
 
 
-def checkconfig(filename, default_config):
+def getconfig(filename):
     """
-    Checks if the config file exists.
-    If not, creates it with the content in default_config.
+    1. Checks if the config file exists.
+    2. If not, creates it with the content in default_config.
+    3. Reads the config file and returns it.
     
-    If this is impossible, returns False.
+    Returns False in case of errors.
     """
+    
+    global default_ignore
 
     if os.path.exists(filename):
-        return True
+        configfile = open(filename, "r")
     else:
         try:
             f = open(filename, 'w')
             f.write(default_config)
             f.close()
+            configfile = open(filename, "r")
         except IOError:
             return False
-    
-    return True
-
-
-def getconfig(filename):
-    """
-    Reads the config file and returns it.
-    Returns False in case of errors.
-    """
-
-    try:
-        configfile = open(filename, "r")
-    except IOError:
-        return False
 
     ret = []
 
@@ -608,9 +610,8 @@ if __name__ == "__main__":
     else:
         homedir = os.curdir
     configfile = os.path.join(homedir, ".pr0nbot.rc")
-    if checkconfig(configfile, default_ignore):
-        ignorelist = getconfig(configfile)
-    else:
+    ignorelist = getconfig(configfile)
+    if not ignorelist:
         print "\nSomething is VERY wrong in your system: " \
               "can't read nor write in your home directory!\n"
         sys.exit(1)
