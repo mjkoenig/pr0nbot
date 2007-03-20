@@ -13,6 +13,10 @@ __date__    = "Mar 20, 2007"
 # - Merged checkconfig() and getconfig() - 
 # Now getconfig does everything (much nicer).
 # 
+# - Renamed default_ignore to default_config. Maybe we'll put 
+# something else besides the ignore list in the config file 
+# in the future.
+#
 # - Replaced cPickle with pickle. We are not working with
 # massive amounts of data anyway, so we can stick with the
 # Python version. Maybe this will make it work on Mac (or
