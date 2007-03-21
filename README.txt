@@ -86,28 +86,6 @@ the spidering state. I couldn't find a way to trap signals in Python, so
 this is how it is (for now).
 
 
-Changelog:
-
-Version 1.0:
-
-  * Initial release.
-
-Version 1.0.1:
-
-  * Merged checkconfig() and getconfig(). Now getconfig() does everything 
-  (much nicer).
-  
-  * Renamed default_ignore to default_config. Maybe we'll put something else
-  besides the ignore list in the config file in the future.
-
-  * Replaced cPickle with pickle. We are not working with massive amounts of 
-  data anyway, so we can stick with the Python version. Maybe this will make
-  it work on Mac (or even Jython, who knows).
-  
-  * getpr0n() is now ALWAYS called with aggro=True for image downloads, 
-  even with regular spidering. 
-
-
 (c) 2007 by Fabio FZero
 Rio de Janeiro - Brazil
 email: fabio.fzero+pr0nbot@gmail.com
