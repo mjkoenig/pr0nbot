@@ -4,7 +4,7 @@
 Spidering robot for pr0n."""
 
 __author__  = "Fabio FZero"
-__version__ = "1.0.1"
+__version__ = "1.0.2 SVN"
 __date__    = "Mar 21, 2007"
 
 import urllib2
@@ -181,8 +181,8 @@ bienvenido
 """
 
 
-# stderr/stdout silencer
 class NullWrite:
+    "stderr/stdout silencer"
     def write(self, *s): pass
 
 
@@ -617,8 +617,8 @@ if __name__ == "__main__":
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],
-                                   "d:aim:vqh",
-                                   ["dir=", "aggro", "ignore", "min=",
+                                   "d:m:aivqh",
+                                   ["dir=", "min=", "aggro", "ignore",
                                     "verbose", "quiet", "help",
                                     "nopics", "nomovies"])
     except getopt.GetoptError:
