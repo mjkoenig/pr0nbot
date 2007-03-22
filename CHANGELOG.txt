@@ -1,8 +1,10 @@
 Changelog:
 
-Version 1.0:
 
-  * Initial release.
+Version 1.0.2:
+
+  * Removed all os.chdir() calls - one more step towards Jython compatibility!
+
 
 Version 1.0.1:
 
@@ -17,4 +19,9 @@ Version 1.0.1:
   it work on Mac (or even Jython, who knows).
   
   * getpr0n() is now ALWAYS called with aggro=True for image downloads, 
-  even with regular spidering. 
+  even with regular spidering.
+  
+
+Version 1.0:
+
+  * Initial release. 
