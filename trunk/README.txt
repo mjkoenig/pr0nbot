@@ -1,4 +1,4 @@
-Pr0nbot v1.0.1 by Fabio FZero (Mar 20, 2007)
+Pr0nbot v1.0.2 by Fabio FZero (Mar 22, 2007)
 - Because you're horny and lazy!
 
 Usage: pr0nbot [options] url

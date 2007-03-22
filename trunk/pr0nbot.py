@@ -5,7 +5,7 @@ Spidering robot for pr0n."""
 
 __author__  = "Fabio FZero"
 __version__ = "1.0.2 SVN"
-__date__    = "Mar 21, 2007"
+__date__    = "Mar 22, 2007"
 
 import urllib2
 import socket
@@ -439,9 +439,9 @@ def crawl(url, ignorelist=[], aggro=False):
     return ret
 
 
-def getpr0n(url, minsize=0, aggro=False):
+def getpr0n(url, the_dir, minsize=0, aggro=False):
     """
-    Downloads a pr0n url to a file following the format:
+    Downloads a pr0n url to a file on the_dir following the format:
 
     server_name-time_as_unix_epoch-filename_from_url
     
@@ -512,8 +512,9 @@ def getpr0n(url, minsize=0, aggro=False):
             return False
     
     f = url.split('/')[-1]
-    filename = "%s-%s-%s" % (url.split('/')[2],
+    name = "%s-%s-%s" % (url.split('/')[2],
                              ('%.2f' % time.time()).replace('.', ''), f)
+    filename = os.path.join(the_dir, name)
     
     try:
         the_file = open(filename,'wb')
@@ -700,8 +701,6 @@ if __name__ == "__main__":
                   "to write on this directory (%s).\n" % the_dir
             sys.exit(1)
 
-    os.chdir(the_dir)
-    
     if quiet: sys.stdout = NullWrite()
 
     print "\nPr0nbot v%s by %s (%s)\n" % (__version__, __author__, __date__)
@@ -745,14 +744,14 @@ if __name__ == "__main__":
                 print "Pics:\n"
                 for pic in result['pics']: 
                     print pic
-                    getpr0n(pic, minsize, True)
+                    getpr0n(pic, the_dir, minsize, True)
                 print "\n"
     
             if result['movies'] and not nomovies:
                 print "Movies:\n"
                 for movie in result['movies']:
                     print movie
-                    getpr0n(movie, minsize, False)
+                    getpr0n(movie, the_dir, minsize, False)
                 print "\n"
     
             visited.append(url)
