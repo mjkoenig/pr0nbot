@@ -538,13 +538,13 @@ def getpr0n(url, the_dir, minsize=0, aggro=False):
     return True
 
 
-def savestate(state):
+def savestate(the_dir, state):
     """
     Saves the current spidering state in a pickle file called
-    pr0nbot.state.
+    pr0nbot.state inside the_dir.
     """
     try:
-        f = open('pr0nbot.state', 'wb')
+        f = open(os.path.join(the_dir, 'pr0nbot.state'), 'wb')
         pickle.dump(state, f)
         f.close()
     except (IOError, pickle.PickleError):
@@ -765,7 +765,8 @@ if __name__ == "__main__":
             #       Right now it terminates the script without
             #       saving the state. As we're already catching
             #       EVERYTHING, I'm lost right now. - FZero
-            ok = savestate( {'start_url':start_url,
+            ok = savestate(the_dir,
+                            {'start_url':start_url,
                              'urls'     :urls,
                              'visited'  :visited,
                              'minsize'  :minsize,
