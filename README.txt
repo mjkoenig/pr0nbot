@@ -1,4 +1,4 @@
-Pr0nbot v1.0.2 by Fabio FZero (Mar 22, 2007)
+Pr0nbot v1.0.2 by Fabio FZero (Mar 26, 2007)
 - Because you're horny and lazy!
 
 Usage: pr0nbot [options] url
@@ -23,7 +23,7 @@ Pr0nbot is a spidering bot that takes a single URL and wanders the web
 downloading images and videos from free porn sites. The project started as a 
 joke that went too far, then became a fun way to improve my Python skills. 
 Right now it's a fairly robust spidering engine which can parse some pretty 
-broken HTML without crashig (and boy, porn sites have horrible, horrible 
+broken HTML without crashing (and boy, porn sites have horrible, horrible 
 code).
 
 Major features are:
