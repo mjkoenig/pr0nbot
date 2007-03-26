@@ -5,7 +5,7 @@ Spidering robot for pr0n."""
 
 __author__  = "Fabio FZero"
 __version__ = "1.0.2 SVN"
-__date__    = "Mar 22, 2007"
+__date__    = "Mar 26, 2007"
 
 import urllib2
 import socket
@@ -325,9 +325,9 @@ def crawl(url, ignorelist=[], aggro=False):
 
     try:
         req      = urllib2.Request(url, None, headers)
-        socket   = urllib2.urlopen(req)
-        mimetype = socket.info().gettype()
-        html     = socket.read()
+        mysocket = urllib2.urlopen(req)
+        mimetype = mysocket.info().gettype()
+        html     = mysocket.read()
     except (urllib2.HTTPError, urllib2.URLError, IOError):
         return False
     
@@ -462,20 +462,20 @@ def getpr0n(url, the_dir, minsize=0, aggro=False):
                 "Gecko/20070225 Firefox/2.0.0.2" }
 
     try:
-        req    = urllib2.Request(url, None, headers)
-        socket = urllib2.urlopen(req)
+        req      = urllib2.Request(url, None, headers)
+        mysocket = urllib2.urlopen(req)
     except (urllib2.HTTPError, urllib2.URLError, IOError):
         return False
     
     # Aggro processing of html disguised as .jpg
-    if "text" in socket.info().gettype():
+    if "text" in mysocket.info().gettype():
         if aggro:
             # If we have a .jpg url inside a text/html wrapper,
             # we can try a little harder. Some sites
             # do this to avoid spidering, hehehe.
             if re.search('\.jpg$', url, re.IGNORECASE):
-                html = socket.read()
-                socket.close()
+                html = mysocket.read()
+                mysocket.close()
                 # Gotta check if it really is html
                 if "<html>" in html.lower():
                     f = url.split('/')[-1]
@@ -494,8 +494,8 @@ def getpr0n(url, the_dir, minsize=0, aggro=False):
                             baseurl = re.findall(r'.*/', url)[0]
                             src = urljoin(baseurl, src)
                         print "-> %s" % src
-                        req    = urllib2.Request(src, None, headers)
-                        socket = urllib2.urlopen(req)
+                        req      = urllib2.Request(src, None, headers)
+                        mysocket = urllib2.urlopen(req)
                     except (urllib2.HTTPError, urllib2.URLError, IOError):
                         return False
                 else:
@@ -507,8 +507,8 @@ def getpr0n(url, the_dir, minsize=0, aggro=False):
 
     # File too short? It's HTML or a placeholder. Ignore it.
     # "Too short" is anything < minsize.
-    if 'content-length' in socket.info().dict:
-        if int(socket.info().dict['content-length']) < (minsize * 1024):
+    if 'content-length' in mysocket.info().dict:
+        if int(mysocket.info().dict['content-length']) < (minsize * 1024):
             return False
     
     f = url.split('/')[-1]
@@ -525,14 +525,14 @@ def getpr0n(url, the_dir, minsize=0, aggro=False):
     # exits as gracefully as possible. This is specially
     # important for movies.
     try:
-        the_file.write(socket.read())
+        the_file.write(mysocket.read())
     except KeyboardInterrupt:
-        socket.close()
+        mysocket.close()
         the_file.close()
         os.remove(filename)
         return False
     
-    socket.close()
+    mysocket.close()
     the_file.close()
     
     return True
