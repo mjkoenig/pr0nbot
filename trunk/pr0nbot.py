@@ -757,7 +757,8 @@ if __name__ == "__main__":
             visited.append(url)
             visited = unique(visited)
 
-        except:
+        # Change to 'except:' in release version; SVN should break on errors.
+        except KeyboardInterrupt:
             # Yeah, we're catching EVERYTHING. The code below
             # makes an elegant retreat in either accidental
             # or intentional interruptions.
