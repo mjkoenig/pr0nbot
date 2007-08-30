@@ -39,6 +39,8 @@ Major features are:
 
     * Comprehensive run-time options. 
 
+Pronbot is released under the GPL v2 license (and I mean v2 ONLY).
+
 
 Installation:
 
